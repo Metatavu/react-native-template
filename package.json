@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^1.5.1",
     "dotenv": "^10.0.0",
     "envalid": "^7.2.1",
+    "eslint-config-airbnb-typescript": "^14.0.1",
     "expo": "~42.0.1",
     "expo-app-auth": "~10.2.2",
     "expo-auth-session": "~3.3.1",
