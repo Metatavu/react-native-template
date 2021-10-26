@@ -1,5 +1,40 @@
 {
   "extends": [
     "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchDepTypes": [
+        "optionalDependencies"
+      ],
+      "addLabels": [
+        "optional"
+      ]
+    },
+    {
+      "automerge": true,
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest",
+        "devDependencies"
+      ]
+    },
+    {
+      "matchDatasources": [
+        "npm"
+      ],
+      "stabilityDays": 7
+    }
+  ],
+  "requiredStatusChecks": null,
+  "reviewers": [
+    "jarinykanen",
+    "lauriLukkarinen"
+  ],
+  "schedule": [
+    "after 10pm and before 5am every weekday",
+    "every weekend"
   ]
 }
