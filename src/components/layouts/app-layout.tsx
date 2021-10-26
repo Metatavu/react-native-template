@@ -32,6 +32,6 @@ const AppLayout: React.FC<Props> = ({ backgroundGradient, children }) => {
       { children }
     </LinearGradient>
   );
-}
+};
 
 export default AppLayout;

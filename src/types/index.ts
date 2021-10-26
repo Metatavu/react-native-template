@@ -24,7 +24,7 @@ export interface Authentication {
   userId: string;
   roles: UserRoles;
   expiresAt: Date;
-};
+}
 
 /**
  * User roles

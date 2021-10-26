@@ -13,14 +13,14 @@ export interface LocaleState {
 /**
  * Initial locale state
  */
-const initialState: LocaleState = { }
+const initialState: LocaleState = { };
 
 /**
  * Locale slice of Redux store
  */
 export const localeSlice = createSlice({
   name: "locale",
-  initialState,
+  initialState: initialState,
   reducers: {
     setLanguage: (state, { payload }: PayloadAction<Language>) => {
       state.language = payload;

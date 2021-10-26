@@ -24,19 +24,22 @@ const ErrorHandler: React.FC = ({ children }) => {
   /**
    * Tries to parse and log error object into readable format
    *
-   * @param error error object to parse and log
+   * @param err error object to parse and log
    */
-  const logErrorObject = async (error?: any) => {
+  const logErrorObject = async (err?: any) => {
     try {
-      if (error instanceof Response) {
-        console.error(await error.text() || error);
+      if (err instanceof Response) {
+        // eslint-disable-next-line no-console
+        console.error(await err.text() || err);
       } else {
-        console.error(JSON.stringify(error, null, 2));
+        // eslint-disable-next-line no-console
+        console.error(JSON.stringify(err, null, 2));
       }
-    } catch (error) {
-      console.error(JSON.stringify(error, null, 2));
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(JSON.stringify(e, null, 2));
     }
-  }
+  };
 
   /**
    * Handles error message and tries to print any given error to logs
@@ -44,10 +47,10 @@ const ErrorHandler: React.FC = ({ children }) => {
    * @param message error message
    * @param err any error
    */
-  const handleError = (message: string, error?: any) => {
+  const handleError = (message: string, err?: any) => {
     setError(message);
-    error && logErrorObject(error);
-  }
+    err && logErrorObject(err);
+  };
 
   /**
    * Renders error modal
@@ -65,7 +68,7 @@ const ErrorHandler: React.FC = ({ children }) => {
         </Button>
       </BasicModal>
     );
-  }
+  };
 
   /**
    * Component render
@@ -76,6 +79,6 @@ const ErrorHandler: React.FC = ({ children }) => {
       { children }
     </ErrorContext.Provider>
   );
-}
+};
 
 export default ErrorHandler;

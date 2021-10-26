@@ -23,7 +23,7 @@ export type RootNavigationRoutes = RootNavigationBaseRoutes;
  */
 type RootNavigationBaseRoutes = {
   Home: undefined;
-}
+};
 
 /**
  * Screen properties

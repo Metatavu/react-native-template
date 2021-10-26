@@ -15,14 +15,14 @@ export interface AuthState {
  */
 const initialState: AuthState = {
   auth: undefined
-}
+};
 
 /**
  * Auth slice of Redux store
  */
 export const authSlice = createSlice({
   name: "auth",
-  initialState,
+  initialState: initialState,
   reducers: {
     authUpdate: (state, action: PayloadAction<Authentication | undefined>) => {
       const auth = action?.payload;

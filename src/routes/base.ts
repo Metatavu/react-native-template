@@ -5,10 +5,12 @@ import HomeScreen from "../components/screens/base/home-screen";
 /**
  * Returns root navigation base routes
  */
-export const getBaseRoutes = (): ScreenProps[] => [
+const getBaseRoutes = (): ScreenProps[] => [
   {
     name: "Home",
     component: HomeScreen,
     options: NavigationUtils.getPrimaryHeaderOptions()
   }
 ];
+
+export default getBaseRoutes;

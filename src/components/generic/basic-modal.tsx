@@ -25,7 +25,6 @@ const BasicModal: React.FC<Props> = ({
   disableTouchableWithoutFeedback,
   children
 }) => {
-
   /**
    * Renders content
    */
@@ -61,21 +60,21 @@ const BasicModal: React.FC<Props> = ({
         </BlurView>
       </TouchableWithoutFeedback>
     );
-  }
+  };
 
   /**
    * Component render
    */
   return (
-      <Modal
-        visible={ visible }
-        animationType="fade"
-        transparent={ !fullScreen }
-        onRequestClose={ close }
-      >
-        { renderContent() }
-      </Modal>
+    <Modal
+      visible={ visible }
+      animationType="fade"
+      transparent={ !fullScreen }
+      onRequestClose={ close }
+    >
+      { renderContent() }
+    </Modal>
   );
-}
+};
 
 export default BasicModal;

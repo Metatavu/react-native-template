@@ -32,6 +32,6 @@ export interface Strings extends LocalizedStringsMethods {
 
 }
 
-const strings: Strings = new LocalizedStrings({ en, fi });
+const strings: Strings = new LocalizedStrings({ en: en, fi: fi });
 
 export default strings;

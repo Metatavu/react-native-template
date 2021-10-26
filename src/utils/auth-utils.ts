@@ -3,7 +3,7 @@ import * as SecureStore from "expo-secure-store";
 import moment from "moment";
 import jwtDecode from "jwt-decode";
 import { Authentication, ParsedToken } from "../types";
-import { Config } from "../app/config";
+import Config from "../app/config";
 
 /** Offline token key in Expo secure store */
 const OFFLINE_TOKEN_KEY = "offline-token";
@@ -46,10 +46,11 @@ class AuthUtils {
         expiresAt: moment().add(expiresIn, "seconds").toDate()
       };
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e);
       return undefined;
     }
-  }
+  };
 
   /**
    * Encrypts and saves offline token to Expo secure store
@@ -60,9 +61,10 @@ class AuthUtils {
     try {
       await SecureStore.setItemAsync(OFFLINE_TOKEN_KEY, token);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
     }
-  }
+  };
 
   /**
    * Retrieves offline token from Expo secure store
@@ -73,10 +75,11 @@ class AuthUtils {
     try {
       return await SecureStore.getItemAsync(OFFLINE_TOKEN_KEY) ?? undefined;
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
       return undefined;
     }
-  }
+  };
 
   /**
    * Removes offline token from Expo secure store
@@ -85,9 +88,10 @@ class AuthUtils {
     try {
       await SecureStore.deleteItemAsync(OFFLINE_TOKEN_KEY);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
     }
-  }
+  };
 
   /**
    * Tries to refresh token and returns authentication with fresh token if successful
@@ -103,22 +107,27 @@ class AuthUtils {
       }
 
       const tokenResponse = await AuthSession.refreshAsync(
-        { clientId, scopes, refreshToken },
+        {
+          clientId: clientId,
+          scopes: scopes,
+          refreshToken: refreshToken
+        },
         serviceConfiguration
       );
 
       const refreshedAuth = AuthUtils.createAuth(tokenResponse);
 
-      if (refreshedAuth) {
-        return refreshedAuth;
-      } else {
+      if (!refreshedAuth) {
         throw new Error("Token refreshing failed");
       }
+
+      return refreshedAuth;
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.warn(JSON.stringify(error, null, 2));
       return Promise.reject(error);
     }
-  }
+  };
 
   /**
    * Helper method to check if authentication needs to be refreshed
@@ -133,7 +142,7 @@ class AuthUtils {
     const currentTime = moment();
     const refreshTimeWithSlack = moment(expiresAt).subtract(ACCESS_TOKEN_REFRESH_SLACK, "seconds");
     return currentTime.isAfter(refreshTimeWithSlack);
-  }
+  };
 
   /**
    * Logs out session of given token
@@ -147,11 +156,17 @@ class AuthUtils {
         throw new Error("Configuration not in place");
       }
 
-      await AuthSession.revokeAsync({ scopes, token }, serviceConfiguration);
+      await AuthSession.revokeAsync(
+        {
+          scopes: scopes,
+          token: token
+        },
+        serviceConfiguration
+      );
     } catch (error) {
-      return Promise.reject(`Could not logout. Error: ${error}`);
+      return Promise.reject(Error(`Could not logout. Error: ${error}`));
     }
-  }
+  };
 
 }
 

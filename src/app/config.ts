@@ -19,7 +19,7 @@ const env = cleanEnv(Constants.manifest?.extra, {
 /**
  * Class providing access to application configuration
  */
-export class Config {
+class Config {
 
   /**
    * Get static application configuration
@@ -45,7 +45,7 @@ export class Config {
         },
         redirectUrl: Config.createRedirectUrl("Home", true)
       }
-    }
+    };
   };
 
   /**
@@ -56,14 +56,14 @@ export class Config {
    * @returns redirect URL as string
    */
   public static createRedirectUrl = (path: string, removePort?: boolean): string => {
-    const url = makeRedirectUri({
+    const redirectUrl = makeRedirectUri({
       path: path,
       useProxy: false,
       scheme: AppConfig.expo.scheme
     });
 
-    return removePort ? url.replace(/:[0-9]{1,}/gm, "") : url;
-  }
+    return removePort ? redirectUrl.replace(/:[0-9]{1,}/gm, "") : redirectUrl;
+  };
 
   /**
    * Get URL for authorization issuer
@@ -74,7 +74,7 @@ export class Config {
    */
   private static getAuthIssuerUrl = (baseUrl: string, realm: string): string => {
     return `${baseUrl}/realms/${realm}`;
-  }
+  };
 
   /**
    * Returns local value with given key from Async storage
@@ -87,9 +87,9 @@ export class Config {
       const result = await AsyncStorage.getItem(key);
       return result ? JSON.parse(result) : undefined;
     } catch (e) {
-      return Promise.reject(`Failed to get value from AsyncStorage. Error: ${e}`);
+      return Promise.reject(Error(`Failed to get value from AsyncStorage. Error: ${e}`));
     }
-  }
+  };
 
   /**
    * Set local value to Async storage
@@ -104,14 +104,14 @@ export class Config {
       const updatedValue = await AsyncStorage.getItem(key);
 
       if (!updatedValue) {
-        return Promise.reject("Failed to set value to AsyncStorage");
+        return await Promise.reject(Error("Failed to set value to AsyncStorage"));
       }
 
-      return await JSON.parse(updatedValue);
+      return JSON.parse(updatedValue);
     } catch (e) {
-      return Promise.reject(`Failed to set value to AsyncStorage. Error: ${e}`);
+      return Promise.reject(Error(`Failed to set value to AsyncStorage. Error: ${e}`));
     }
-  }
+  };
 
   /**
    * Removes local value from Async storage
@@ -123,7 +123,10 @@ export class Config {
     try {
       return await AsyncStorage.removeItem(key);
     } catch (e) {
-      return Promise.reject(`Failed to set value to AsyncStorage. Error: ${e}`);
+      return Promise.reject(Error(`Failed to set value to AsyncStorage. Error: ${e}`));
     }
-  }
+  };
+
 }
+
+export default Config;

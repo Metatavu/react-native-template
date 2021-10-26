@@ -9,7 +9,7 @@ import styles from "../styles/utils/navigation-utils";
 /**
  * Class for navigation utility methods
  */
-export class NavigationUtils {
+class NavigationUtils {
 
   /**
    * Navigates to given route of root navigation routes
@@ -37,14 +37,14 @@ export class NavigationUtils {
     } else {
       navigation.navigate(routeName);
     }
-  }
+  };
 
   /**
    * Returns navigation options for primary header
    *
    * @returns function that returns stack navigation options for stack navigator screen
    */
-  public static getPrimaryHeaderOptions = () => (props: NavigationHeaderProps): NativeStackNavigationOptions => ({
+  public static getPrimaryHeaderOptions = () => (): NativeStackNavigationOptions => ({
     animationTypeForReplace: "push",
     gestureEnabled: false,
     headerStyle: styles.headerStyle
@@ -89,3 +89,5 @@ export class NavigationUtils {
   });
 
 }
+
+export default NavigationUtils;

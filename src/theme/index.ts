@@ -10,7 +10,7 @@ import { CustomSpacing } from "./types";
  */
 export const createCustomSpacing = (baseValue: number): CustomSpacing => (multiplier: number = 1) => {
   return baseValue * multiplier;
-}
+};
 
 /**
  * Application theme for React Native Paper
@@ -23,4 +23,4 @@ export const theme: ReactNativePaper.Theme = {
   },
   roundness: 5,
   spacing: createCustomSpacing(8)
-}
+};

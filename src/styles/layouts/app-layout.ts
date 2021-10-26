@@ -41,7 +41,7 @@ export default StyleSheet.create({
   },
 
   logoutButtonContainer: {
-    marginTop: "auto",
+    marginTop: "auto"
   },
 
   bottomNavigationContainer: {

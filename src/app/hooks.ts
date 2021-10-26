@@ -31,19 +31,18 @@ export const useInterval = (callback: () => any, delay: number) => {
   });
 
   React.useEffect(() => {
-    const tick = () => savedCallback.current && savedCallback.current();
-    const timeout = setInterval(tick, delay);
+    const timeout = setInterval(() => savedCallback.current && savedCallback.current(), delay);
 
     stopInterval.current = () => clearInterval(timeout);
 
     return () => {
       clearInterval(timeout);
       stopInterval.current = undefined;
-    }
+    };
   }, [ delay ]);
 
   return stopInterval.current;
-}
+};
 
 /**
  * Custom hook for calculating delayed component mount changes
@@ -68,7 +67,7 @@ export const useDelayUnmount = (isMounted: boolean, delayTime: number) => {
   }, [ isMounted, delayTime, shouldRender ]);
 
   return shouldRender;
-}
+};
 
 /**
  * React hook that enables handling all device back button events and back gestures
@@ -93,4 +92,4 @@ export const useGoBackHandler = <ParamList extends ParamListBase, RouteName exte
       };
     }, [ navigation, onGoBackCallback, dependencies ])
   );
-}
+};

@@ -6,7 +6,7 @@ import AppLayout from "../../layouts/app-layout";
 /**
  * Home screen
  */
-const HomeScreen:  React.FC = () => {
+const HomeScreen: React.FC = () => {
   return (
     <AppLayout>
       <Paragraph>
@@ -14,6 +14,6 @@ const HomeScreen:  React.FC = () => {
       </Paragraph>
     </AppLayout>
   );
-}
+};
 
 export default HomeScreen;

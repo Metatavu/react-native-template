@@ -5,7 +5,7 @@ import { AppState, AppStateStatus, Alert, View } from "react-native";
 import AuthUtils from "../../utils/auth-utils";
 import strings from "../../localization/strings";
 import { useAppDispatch, useAppSelector, useInterval } from "../../app/hooks";
-import { Config } from "../../app/config";
+import Config from "../../app/config";
 import WebView from "react-native-webview";
 
 /**
@@ -13,7 +13,7 @@ import WebView from "react-native-webview";
  */
 interface Props {
   onLoginFail?: () => void;
-};
+}
 
 /**
  * Component for keeping authentication token fresh
@@ -27,16 +27,22 @@ const AuthRefresh: React.FC<Props> = ({ onLoginFail }) => {
   const [ previousSessionRevoked, setPreviousSessionRevoked ] = React.useState(false);
 
   /**
-   * App state change listener
-   *
-   * @param nextAppState next app state
+   * Handles logging in again in case token refreshing fails
    */
-  const handleAppStateChange = async (nextAppState: AppStateStatus) => {
-    if (appState.match(/inactive|background/) && nextAppState === 'active') {
-      await refreshAuth();
-    }
+  const handleTokenRefreshFailure = () => {
+    dispatch(authUpdate(undefined));
+    onLoginFail && onLoginFail();
+  };
 
-    setAppState(nextAppState);
+  /**
+   * Displays authentication expired alert to user
+   */
+  const showAuthExpiredAlert = () => {
+    Alert.alert(
+      strings.auth.loginSessionExpiredTitle,
+      strings.auth.loginSessionExpiredContent,
+      [{ text: "OK", onPress: handleTokenRefreshFailure }]
+    );
   };
 
   /**
@@ -52,26 +58,20 @@ const AuthRefresh: React.FC<Props> = ({ onLoginFail }) => {
     } catch (e) {
       showAuthExpiredAlert();
     }
-  }
+  };
 
   /**
-   * Displays authentication expired alert to user
+   * App state change listener
+   *
+   * @param nextAppState next app state
    */
-  const showAuthExpiredAlert = () => {
-    Alert.alert(
-      strings.auth.loginSessionExpiredTitle,
-      strings.auth.loginSessionExpiredContent,
-      [{ text: "OK", onPress: handleTokenRefreshFailure }]
-    );
-  }
+  const handleAppStateChange = async (nextAppState: AppStateStatus) => {
+    if (appState.match(/inactive|background/) && nextAppState === "active") {
+      await refreshAuth();
+    }
 
-  /**
-   * Handles logging in again in case token refreshing fails
-   */
-  const handleTokenRefreshFailure = () => {
-    dispatch(authUpdate(undefined));
-    onLoginFail && onLoginFail();
-  }
+    setAppState(nextAppState);
+  };
 
   /**
    * Interval for refreshing authentication
@@ -98,6 +98,6 @@ const AuthRefresh: React.FC<Props> = ({ onLoginFail }) => {
   }
 
   return null;
-}
+};
 
 export default AuthRefresh;

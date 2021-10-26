@@ -6,7 +6,7 @@ export default StyleSheet.create({
   loader: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
 
   loaderText: {
