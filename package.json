@@ -45,7 +45,7 @@
     "react-redux": "7.2.6"
   },
   "devDependencies": {
-    "@babel/core": "7.15.8",
+    "@babel/core": "7.16.0",
     "@openapitools/openapi-generator-cli": "2.4.13",
     "@types/react": "16.14.20",
     "@types/react-native": "0.66.1",
