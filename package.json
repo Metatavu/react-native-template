@@ -48,7 +48,7 @@
     "@babel/core": "7.16.10",
     "@openapitools/openapi-generator-cli": "2.4.25",
     "@types/react": "16.14.21",
-    "@types/react-native": "0.66.13",
+    "@types/react-native": "0.66.15",
     "@types/react-redux": "7.1.22",
     "@typescript-eslint/eslint-plugin": "5.10.0",
     "@typescript-eslint/parser": "5.10.0",
