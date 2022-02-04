@@ -16,7 +16,7 @@
     "@react-navigation/material-top-tabs": "6.1.1",
     "@react-navigation/native": "6.0.8",
     "@react-navigation/native-stack": "6.4.1",
-    "@reduxjs/toolkit": "1.7.1",
+    "@reduxjs/toolkit": "1.7.2",
     "dotenv": "10.0.0",
     "envalid": "7.2.2",
     "eslint-config-airbnb-typescript": "14.0.2",
