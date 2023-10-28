@@ -18,7 +18,7 @@
     "@react-navigation/native-stack": "6.9.15",
     "@reduxjs/toolkit": "1.9.7",
     "dotenv": "10.0.0",
-    "envalid": "7.3.1",
+    "envalid": "8.0.0",
     "eslint-config-airbnb-typescript": "14.0.2",
     "expo": "42.0.5",
     "expo-app-auth": "10.2.2",
